@@ -4,6 +4,7 @@ export const styles = StyleSheet.create({
     conteiner:{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom:10,
 
     },
     status:{
