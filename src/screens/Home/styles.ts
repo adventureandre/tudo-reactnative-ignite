@@ -9,10 +9,11 @@ export const styles = StyleSheet.create({
         height:'23%',
         zIndex:1
     },
-    main:{
+    Tasks:{
         flex: 1,
         backgroundColor:'#1E1E1E',
         width:'100%',
-        padding:24,
+        paddingHorizontal:24,
+        paddingVertical: 48,
     }
 })

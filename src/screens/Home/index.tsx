@@ -2,6 +2,7 @@ import { View } from "react-native"
 import { styles } from "./styles"
 import { NewTask } from "../../components/newTask";
 import { Logo } from "../../components/Logo";
+import { Info } from "../../components/Info";
 
 export function Home() {
     return (
@@ -10,8 +11,8 @@ export function Home() {
                 <Logo />
                 <NewTask />
             </View>
-
-            <View style={styles.main}>
+            <View style={styles.Tasks}>
+                <Info/>
             </View>
         </>
 
