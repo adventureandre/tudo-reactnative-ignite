@@ -12,7 +12,7 @@ export function Home() {
                 <NewTask />
             </View>
             <View style={styles.Tasks}>
-                <Info/>
+                <Info criadas={0} concluidas={0}/>
             </View>
         </>
 

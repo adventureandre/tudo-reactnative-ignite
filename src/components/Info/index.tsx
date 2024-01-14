@@ -7,20 +7,25 @@ interface StatusProps {
     color?: string;
 }
 
+interface InfoProps {
+    criadas: number;
+    concluidas: number;
+}
+
 const Status = ({tipo,quant,color}:StatusProps) => {
     return (
-        <View>
-            <Text style={{ color: color }}>{tipo}</Text>
-            <Text>{quant}</Text>
+        <View style={styles.status}>
+            <Text style={{...styles.text, color: color }}>{tipo}</Text>
+            <Text style={styles.quantidade}>{quant}</Text>
         </View>
     )
 }
 
-export const Info = () => {
+export const Info = ({criadas,concluidas}:InfoProps) => {
     return (
         <View style={styles.conteiner}>
-            <Status tipo="Criadas" quant={0} color="#4EA8DE" />
-            <Status tipo="Concluidas" quant={2} color="#8284FA" />
+            <Status tipo="Criadas" quant={criadas} color="#4EA8DE" />
+            <Status tipo="Concluidas" quant={concluidas} color="#8284FA" />
         </View>
     )
 }
