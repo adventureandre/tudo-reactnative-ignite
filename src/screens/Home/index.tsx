@@ -8,19 +8,27 @@ import { useState } from "react";
 import { Text } from "react-native";
 import { EmptyComponent } from "../../components/EmptyComponent";
 
-interface TaskProps {
+export interface TaskProps {
     description: string;
     completed: boolean;
 }
 
 export function Home() {
- const {tasks, setTasks} = useState<TaskProps[]>([])
+ const [tasks, setTasks] = useState<TaskProps[]>([])
+
+
+ const handleTaskAdd = (newTask: string) => {
+    const newTaskItem = { description: newTask, completed: false };
+    setTasks((prevTasks) => [...prevTasks, newTaskItem]);
+};
+
+ 
 
     return (
         <>
             <View style={styles.conteiner}>
                 <Logo />
-                <NewTask />
+                <NewTask  addTask={handleTaskAdd}  />
             </View>
             <View style={styles.Tasks}>
                 <Info criadas={0} concluidas={0} />
