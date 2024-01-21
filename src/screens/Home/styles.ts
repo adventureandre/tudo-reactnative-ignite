@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 
+
 export const styles = StyleSheet.create({
     conteiner: {
         backgroundColor: "#160c18",
@@ -7,6 +8,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'relative',
         height:'23%',
+        elevation:5,
         zIndex:1
     },
     Tasks:{

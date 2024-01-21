@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
 
         gap: 5,
         marginTop: 48,
+        zIndex:1
     },
 
     newTask: {
