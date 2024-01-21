@@ -1,47 +1,36 @@
-import React, { useState } from 'react';
-import { View, Text, Alert } from "react-native"
+import React from 'react';
+import { View, Text} from "react-native"
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { styles } from './styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { TaskProps } from '../../screens/Home';
 
-export const Task = ({ task }) => {
+interface TaskitemsProps {
+    task: TaskProps;
+    deleteTask: (desc: string)=>void;
+}
 
-    const [checked, setChecked] = React.useState(true);
-    const toggleCheckbox = () => setChecked(!checked);
+export const Task = ({ task , deleteTask }: TaskitemsProps) => {
 
-    const handleTaskRemove = () => {
 
-        Alert.alert("Remover", "Remover a task name?", [
-            {
-                text: 'Sim',
-                onPress: () => {
-                    console.log('Ponto de remoção');
-                }
-            },
-            {
-                text: 'Não',
-                style: 'cancel',
-            }
 
-        ])
-
-    }
-
- 
     return (
         <View style={styles.container}>
             <BouncyCheckbox
-            style={styles.checkbox}
+                style={styles.checkbox}
+                isChecked={task.completed}
                 size={18}
                 fillColor="#5E60CE"
                 unfillColor="#262626"
-                text={task}
+                text={task.description}
                 iconStyle={{ borderColor: "red" }}
-                innerIconStyle={{ borderWidth: 1}}
+                innerIconStyle={{ borderWidth: 1 }}
                 textStyle={{ fontSize: 16, color: "#F2F2F2" }}
-                onPress={(isChecked: boolean) => { }}
+                // onPress={() => }
             />
-            <Text style={styles.trash} onPress={handleTaskRemove}><Ionicons name="trash" size={18} color="#808080"/></Text>
+            <Text style={styles.trash} onPress={() => deleteTask(task.description)}>
+  <Ionicons name="trash" size={18} color="#808080" />
+</Text>
         </View>
     );
 };
