@@ -40,6 +40,18 @@ export function Home() {
 
     }
 
+    const handleTaskCompleted = (desc:string) =>{
+        setTasks((prevTasks)=>
+        prevTasks.map((task)=>
+        task.description === desc ? {...task, completed: !task.completed}
+        : task
+        )
+        )
+    }
+
+    const tasksCriadas =  tasks.length;
+const tasksCompleted =  tasks.filter((task)=> task.completed ).length
+
     return (
         <>
             <View style={styles.conteiner}>
@@ -47,14 +59,14 @@ export function Home() {
                 <NewTask addTask={handleTaskAdd} />
             </View>
             <View style={styles.Tasks}>
-                <Info criadas={0} concluidas={0} />
+                <Info criadas={tasksCriadas} concluidas={tasksCompleted} />
 
                 <FlatList
                     data={tasks}
                     showsVerticalScrollIndicator={false}
                     keyExtractor={(item, index) => index.toString()}
                     renderItem={({ item, index }) => (
-                        <Task key={index} task={item} deleteTask={handleTaskRemove}/>
+                        <Task key={index} task={item} deleteTask={handleTaskRemove} completeTask={handleTaskCompleted}/>
                     )}
                     ListEmptyComponent={() => (
                         <EmptyComponent />
