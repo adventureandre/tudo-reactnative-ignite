@@ -7,8 +7,8 @@ import { TaskProps } from '../../screens/Home';
 
 interface TaskitemsProps {
     task: TaskProps;
-    deleteTask: (desc: string)=>void;
-    completeTask: (desc: string)=>void;
+    deleteTask: (taskId: string)=>void;
+    completeTask: (taskId: string)=>void;
 }
 
 export const Task = ({ task , deleteTask,completeTask }: TaskitemsProps) => {
@@ -27,9 +27,9 @@ export const Task = ({ task , deleteTask,completeTask }: TaskitemsProps) => {
                 iconStyle={{ borderColor: "red" }}
                 innerIconStyle={{ borderWidth: 1 }}
                 textStyle={{ fontSize: 16, color: "#F2F2F2" }}
-                onPress={() => completeTask(task.description)}
+                onPress={() => completeTask(task.id)}
             />
-            <Text style={styles.trash} onPress={() => deleteTask(task.description)}>
+            <Text style={styles.trash} onPress={() => deleteTask(task.id)}>
   <Ionicons name="trash" size={18} color="#808080" />
 </Text>
         </View>

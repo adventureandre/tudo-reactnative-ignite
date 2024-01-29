@@ -5,9 +5,11 @@ import { Logo } from "../../components/Logo";
 import { Info } from "../../components/Info";
 import { Task } from "../../components/Task";
 import { useState } from "react";
+import uuid from 'react-native-uuid'
 import { EmptyComponent } from "../../components/EmptyComponent";
 
 export interface TaskProps {
+    id: string;
     description: string;
     completed: boolean;
 }
@@ -16,18 +18,18 @@ export function Home() {
     const [tasks, setTasks] = useState<TaskProps[]>([])
 
     const handleTaskAdd = (newTask: string) => {
-        const newTaskItem = {description: newTask, completed: false };
+        const newTaskItem = { id: uuid.v4() as string, description: newTask, completed: false };
         setTasks((prevTasks) => [...prevTasks, newTaskItem]);
     };
 
-    const handleTaskRemove = (desc:string) => {
+    const handleTaskRemove = (taskId:string) => {
 
         Alert.alert("Remover", "Remover a task name?", [
             {
                 text: 'Sim',
                 onPress: () => {
                     setTasks((prevTasks) =>
-                    prevTasks.filter((task) => task.description !== desc)
+                    prevTasks.filter((task) => task.id !== taskId)
                 );
                 }
             },
@@ -40,10 +42,10 @@ export function Home() {
 
     }
 
-    const handleTaskCompleted = (desc:string) =>{
+    const handleTaskCompleted = (taskId:string) =>{
         setTasks((prevTasks)=>
         prevTasks.map((task)=>
-        task.description === desc ? {...task, completed: !task.completed}
+        task.id === taskId ? {...task, completed: !task.completed}
         : task
         )
         )
@@ -64,9 +66,9 @@ const tasksCompleted =  tasks.filter((task)=> task.completed ).length
                 <FlatList
                     data={tasks}
                     showsVerticalScrollIndicator={false}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) => (
-                        <Task key={index} task={item} deleteTask={handleTaskRemove} completeTask={handleTaskCompleted}/>
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) => (
+                        <Task key={item.id} task={item} deleteTask={handleTaskRemove} completeTask={handleTaskCompleted}/>
                     )}
                     ListEmptyComponent={() => (
                         <EmptyComponent />
